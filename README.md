@@ -1,4 +1,4 @@
-# marp_slide_design
+# marp-slide-design
 
 marp形式でのスライドデザイン
 
