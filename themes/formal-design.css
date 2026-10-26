@@ -16,7 +16,7 @@ section {
 section.cover,
 section.title {
   color: var(--lt-ink);
-  background: white;
+  background: linear-gradient(135deg, #ffffff 0%, var(--lt-accent-weak) 100%);
   border-top: 12px solid var(--lt-accent);
 }
 
@@ -47,4 +47,4 @@ section.cover.cover--image h2,
 section.title.cover--image h2 { color: white; }
 
 section.section-title,
-section.section { background: linear-gradient(125deg, #14392b, var(--lt-accent)); }
+section.section { background: linear-gradient(115deg, var(--lt-accent-weak) 0%, #ffffff 68%); }

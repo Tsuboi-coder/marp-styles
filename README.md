@@ -14,12 +14,13 @@ Marp用デザインシステム **Lin（リン）**。凛とした知性・清�
 ## Setup and standalone test
 
 ```sh
-npm ci
-npm test
-npm run build
+pnpm install --frozen-lockfile
+pnpm test
+pnpm run build
 ```
 
-`npm test` は `base-design` と `formal-design` の登録・継承・HTMLレンダリングを検証します。`npm run build` は全見本を `dist/html/` と `dist/pdf/` に生成します。
+`pnpm test` は `base-design` と `formal-design` の登録・継承・HTMLレンダリングを検証します。`pnpm run build` は全見本を `dist/html/` と `dist/pdf/` に生成します。
+見本は形式ごとに一括変換し、PDF生成に使うChromiumの起動回数を抑えています。ブラウザを使わずHTMLだけ確認する場合は `pnpm run build:html` を利用してください。
 
 ## Use from another repository
 

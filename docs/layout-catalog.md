@@ -1,12 +1,14 @@
 # Layout catalog
 
-All snippets assume `html: true` and `theme: base-design`. The executable source is under `examples/`; after `npm run build`, rendered HTML and PDF are under `dist/`.
+All snippets assume `html: true` and `theme: base-design`. The executable source is under `examples/`; after `pnpm run build`, rendered HTML and PDF are under `dist/`.
 
 ## Cover / section title
 
 - Use for: the deck cover and a real topic transition.
 - Avoid for: ordinary content or decorative pauses.
 - Classes: `cover`, `section-title` (`title` and `section` remain compatible aliases).
+- The default cover uses a full-slide gradient. Section dividers use a pale
+  accent background and one edge rule; talks may change colors through tokens.
 
 ```markdown
 <!-- _class: cover -->

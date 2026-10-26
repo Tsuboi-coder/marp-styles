@@ -88,7 +88,7 @@ section > h1 {
   right: 150px;
   height: 48px;
   margin: 0;
-  padding-left: 20px;
+  padding-left: 0;
   overflow: hidden;
   color: var(--lt-ink);
   border: 0;
@@ -98,17 +98,6 @@ section > h1 {
   line-height: 48px;
   text-overflow: ellipsis;
   white-space: nowrap;
-}
-
-section:not(.cover):not(.title):not(.section-title):not(.section):not(.statement) > h1::before {
-  content: "";
-  position: absolute;
-  top: 6px;
-  bottom: 6px;
-  left: 0;
-  width: 7px;
-  border-radius: 2px;
-  background: var(--lt-accent);
 }
 
 section::after {
@@ -171,7 +160,7 @@ section.title {
   padding: 76px 86px;
   overflow: hidden;
   color: var(--lt-accent-contrast);
-  background: linear-gradient(135deg, color-mix(in srgb, var(--lt-accent-strong) 92%, #07151b), var(--lt-accent));
+  background: linear-gradient(135deg, #073b4c 0%, var(--lt-accent-strong) 48%, var(--lt-accent) 100%);
 }
 section.cover > h1,
 section.title > h1 {
@@ -223,7 +212,8 @@ section.section {
   justify-content: center;
   padding: 82px;
   color: var(--lt-ink);
-  background: #ffffff;
+  background: linear-gradient(115deg, var(--lt-accent-weak) 0%, #ffffff 68%);
+  box-shadow: inset 12px 0 0 var(--lt-accent);
 }
 section.section-title > h1,
 section.section > h1 {

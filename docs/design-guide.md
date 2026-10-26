@@ -10,6 +10,11 @@ The default frame follows an editorial hierarchy inherited from the historical
 3. a small deck label (`header`) and presenter/date (`footer`) at the lower left;
 4. page number at the lower right.
 
+Ordinary page titles use type and whitespace only; do not add a decorative
+leading rule. Covers use a restrained color gradient, while section dividers
+use a pale accent wash and a single edge rule so that transitions remain visible
+without competing with the talk content.
+
 The `toc`, `statement`, per-slide `data-color`, and fixed-heading ideas from
 `tmp1_Lin` are now supported by `themes/base-design.css`. The prototype remains
 untouched as a regression reference.

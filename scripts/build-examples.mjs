@@ -1,5 +1,5 @@
-import { readdirSync, mkdirSync } from 'node:fs';
-import { resolve, basename, extname } from 'node:path';
+import { mkdirSync } from 'node:fs';
+import { resolve } from 'node:path';
 import { spawnSync } from 'node:child_process';
 
 const root = resolve(import.meta.dirname, '..');
@@ -15,25 +15,19 @@ if (!formats.every((format) => ['html', 'pdf'].includes(format))) {
   process.exit(2);
 }
 
-const inputs = readdirSync(examplesDir)
-  .filter((name) => extname(name) === '.md')
-  .sort();
-
 for (const format of formats) {
   const outputDir = resolve(root, 'dist', format);
   mkdirSync(outputDir, { recursive: true });
-  for (const input of inputs) {
-    const output = resolve(outputDir, `${basename(input, '.md')}.${format}`);
-    const args = [
-      resolve(examplesDir, input),
-      '--theme-set', resolve(root, 'themes', 'base-design.css'),
-      '--theme-set', resolve(root, 'themes', 'formal-design.css'),
-      '--html',
-      '--allow-local-files',
-      `--${format}`,
-      '--output', output,
-    ];
-    const result = spawnSync(marp, args, { cwd: root, stdio: 'inherit' });
-    if (result.status !== 0) process.exit(result.status ?? 1);
-  }
+  const args = [
+    '--input-dir', examplesDir,
+    '--theme-set', resolve(root, 'themes', 'base-design.css'),
+    '--theme-set', resolve(root, 'themes', 'formal-design.css'),
+    '--html',
+    '--allow-local-files',
+    '--no-parallel',
+    `--${format}`,
+    '--output', outputDir,
+  ];
+  const result = spawnSync(marp, args, { cwd: root, stdio: 'inherit' });
+  if (result.status !== 0) process.exit(result.status ?? 1);
 }
