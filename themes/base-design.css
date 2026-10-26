@@ -20,6 +20,8 @@
   --lt-border: #c9dbd7;
   --lt-card-background: #ffffff;
   --lt-code-background: #162f41;
+  --lt-cover-image: none;
+  --lt-cover-position: center;
 
   --lt-font-body: Helvetica, "Helvetica Neue", "Hiragino Sans", "Yu Gothic", "Noto Sans JP", sans-serif;
   --lt-font-heading: "Hiragino Kaku Gothic ProN", "Hiragino Sans", "Noto Sans JP", sans-serif;
@@ -35,14 +37,44 @@
   --lt-radius-lg: 24px;
 }
 
+/* Per-slide palette switches inherited from the tmp1_Lin prototype. */
+section[data-color="blue"] {
+  --lt-accent: #3b82c4;
+  --lt-accent-strong: #245b91;
+  --lt-accent-weak: #eef6fc;
+  --lt-border: #c9deef;
+}
+section[data-color="red"] {
+  --lt-accent: #d05252;
+  --lt-accent-strong: #923333;
+  --lt-accent-weak: #fdf0f0;
+  --lt-border: #efcece;
+}
+section[data-color="orange"] {
+  --lt-accent: #df7a2c;
+  --lt-accent-strong: #9a4e17;
+  --lt-accent-weak: #fff4eb;
+  --lt-border: #f0d5bf;
+}
+section[data-color="purple"] {
+  --lt-accent: #8a65b8;
+  --lt-accent-strong: #5c3d86;
+  --lt-accent-weak: #f5f0fa;
+  --lt-border: #ded1eb;
+}
+section[data-color="peach"] {
+  --lt-accent: #e28a73;
+  --lt-accent-strong: #a45542;
+  --lt-accent-weak: #fff3ef;
+  --lt-border: #efd3ca;
+}
+
 section {
   width: 1280px;
   height: 720px;
   padding: 110px 72px 54px;
   color: var(--lt-ink);
-  background:
-    radial-gradient(circle at 95% 5%, color-mix(in srgb, var(--lt-accent) 11%, transparent) 0 88px, transparent 90px),
-    linear-gradient(135deg, #ffffff 0%, var(--lt-background) 100%);
+  background: #ffffff;
   font-family: var(--lt-font-body);
   font-size: 29px;
   line-height: 1.45;
@@ -56,10 +88,10 @@ section > h1 {
   right: 150px;
   height: 48px;
   margin: 0;
-  padding-left: 18px;
+  padding-left: 20px;
   overflow: hidden;
   color: var(--lt-ink);
-  border-left: 8px solid var(--lt-accent);
+  border: 0;
   font-family: var(--lt-font-heading);
   font-size: 40px;
   font-weight: 700;
@@ -68,7 +100,19 @@ section > h1 {
   white-space: nowrap;
 }
 
+section:not(.cover):not(.title):not(.section-title):not(.section):not(.statement) > h1::before {
+  content: "";
+  position: absolute;
+  top: 6px;
+  bottom: 6px;
+  left: 0;
+  width: 7px;
+  border-radius: 2px;
+  background: var(--lt-accent);
+}
+
 section::after {
+  position: absolute;
   right: 46px;
   bottom: 20px;
   color: var(--lt-accent-strong);
@@ -76,14 +120,30 @@ section::after {
   font-weight: 700;
 }
 
-header,
-footer {
+header {
+  position: absolute;
+  z-index: 5;
+  top: auto;
+  right: 150px;
+  bottom: 27px;
+  left: 72px;
   color: var(--lt-muted);
-  font-size: 15px;
+  font-size: 14px;
+  font-weight: 700;
   letter-spacing: .06em;
 }
-
-footer { left: 72px; bottom: 20px; }
+footer {
+  display: block;
+  position: absolute;
+  z-index: 5;
+  top: auto;
+  right: 150px;
+  bottom: 9px;
+  left: 72px;
+  color: var(--lt-muted);
+  font-size: 11px;
+  letter-spacing: .04em;
+}
 h1, h2, h3 { font-family: var(--lt-font-heading); }
 h2 { color: var(--lt-accent-strong); font-size: 34px; }
 h3 { margin: 0 0 10px; color: var(--lt-accent-strong); font-size: 25px; }
@@ -104,19 +164,20 @@ td:last-child { border-right: 1px solid var(--lt-border); border-radius: 0 10px 
 /* Cover and section divider */
 section.cover,
 section.title {
+  position: relative;
   display: flex;
   flex-direction: column;
   justify-content: center;
   padding: 76px 86px;
+  overflow: hidden;
   color: var(--lt-accent-contrast);
-  background:
-    linear-gradient(110deg, color-mix(in srgb, var(--lt-accent-strong) 97%, #000), color-mix(in srgb, var(--lt-accent) 90%, transparent)),
-    repeating-linear-gradient(135deg, transparent 0 38px, rgba(255,255,255,.07) 39px 41px);
+  background: linear-gradient(135deg, color-mix(in srgb, var(--lt-accent-strong) 92%, #07151b), var(--lt-accent));
 }
 section.cover > h1,
 section.title > h1 {
+  z-index: 1;
   position: static;
-  width: 88%;
+  width: 72%;
   height: auto;
   margin: 0 0 22px;
   padding: 0;
@@ -129,10 +190,31 @@ section.title > h1 {
 }
 section.cover h2,
 section.title h2 { color: var(--lt-accent-contrast); font-size: 31px; font-weight: 400; }
+section.cover > *,
+section.title > * { z-index: 1; }
+.lt-eyebrow {
+  margin-bottom: 24px;
+  color: var(--lt-highlight);
+  font-size: 18px;
+  font-weight: 800;
+  letter-spacing: .16em;
+}
 section.cover strong,
 section.title strong { color: var(--lt-highlight); }
 section.cover::after,
 section.title::after { display: none; }
+section.cover header,
+section.cover footer,
+section.title header,
+section.title footer { display: none; }
+
+/* Talk CSS supplies --lt-cover-image and optionally --lt-cover-position. */
+section.cover-image,
+section.cover--image {
+  background:
+    linear-gradient(90deg, rgba(8,25,34,.92) 0%, rgba(8,25,34,.78) 48%, rgba(8,25,34,.35) 100%),
+    var(--lt-cover-image) var(--lt-cover-position) / cover no-repeat;
+}
 
 section.section-title,
 section.section {
@@ -140,8 +222,8 @@ section.section {
   flex-direction: column;
   justify-content: center;
   padding: 82px;
-  color: var(--lt-accent-contrast);
-  background: linear-gradient(125deg, var(--lt-accent-strong), var(--lt-accent));
+  color: var(--lt-ink);
+  background: #ffffff;
 }
 section.section-title > h1,
 section.section > h1 {
@@ -150,22 +232,82 @@ section.section > h1 {
   margin: 0 0 16px;
   padding: 0;
   overflow: visible;
-  color: var(--lt-accent-contrast);
+  color: var(--lt-ink);
   border: 0;
   font-size: 60px;
   line-height: 1.2;
   white-space: normal;
 }
 section.section-title h2,
-section.section h2 { color: var(--lt-highlight); }
+section.section h2 { color: var(--lt-accent-strong); }
 section.section-title strong,
-section.section strong { color: var(--lt-highlight); }
+section.section strong { color: var(--lt-accent-strong); }
 section.section-title::after,
 section.section::after { display: none; }
 section.section-title header,
 section.section-title footer,
 section.section header,
-section.section footer { color: rgba(255,255,255,.68); }
+section.section footer { color: var(--lt-muted); }
+
+/* Statement-only page: one sentence, with the deck label and page number retained. */
+section.statement {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: center;
+  padding: 90px 118px;
+  background:
+    linear-gradient(90deg, var(--lt-accent) 0 12px, transparent 12px),
+    #ffffff;
+}
+section.statement > h1 {
+  position: static;
+  width: 100%;
+  height: auto;
+  max-width: 1000px;
+  margin: 0;
+  padding: 0;
+  overflow: visible;
+  color: var(--lt-ink);
+  border: 0;
+  font-size: 54px;
+  line-height: 1.38;
+  white-space: normal;
+}
+section.statement > p {
+  max-width: 900px;
+  margin: 30px 0 0;
+  color: var(--lt-muted);
+  font-size: 23px;
+}
+
+/* Numbered agenda inherited from tmp1_Lin, expressed with the stable API. */
+section.toc ol,
+section.toc ul {
+  width: 82%;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  counter-reset: lt-toc;
+}
+section.toc ol > li,
+section.toc ul > li {
+  display: flex;
+  align-items: center;
+  min-height: 64px;
+  margin: 0;
+  padding: 8px 4px;
+  border-bottom: 1px solid var(--lt-border);
+  counter-increment: lt-toc;
+}
+section.toc ol > li::before,
+section.toc ul > li::before {
+  content: counter(lt-toc, decimal-leading-zero);
+  flex: 0 0 58px;
+  color: var(--lt-accent);
+  font-size: 23px;
+  font-weight: 800;
+}
 
 /* Columns */
 .lt-cols,

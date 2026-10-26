@@ -2,14 +2,14 @@
 
 Marp用デザインシステム **Lin（リン）**。凛とした知性・清潔感と、罫線を活かす整然としたレイアウトを組み合わせ、講義・学会・研究発表で内容を明快に伝えることを目指します。
 
-`tmp1_Lin/` は既存試作を保護する履歴領域です。新規利用では `themes/` と `examples/` を参照してください。
+`tmp1_Lin/` は既存試作を保護する履歴領域です。固定見出し、目次、ステートメント、ページ別配色の考え方は正式テーマへ統合済みです。新規利用では `themes/` と `examples/` を参照してください。
 
 ## Themes
 
 - `themes/base-design.css`: 完結した共通テーマ。`--lt-*`トークンと`.lt-*`レイアウトを提供。
 - `themes/formal-design.css`: `base-design`を継承した抑制的な研究発表向けテーマ。
 
-主なレイアウトは、表紙・章扉、2/3カラム、写真+文章、カード、比較、工程、フロー、機構図、コード、数式、読み物、参考文献、takeawayです。用途・避ける用途・最小例は [`docs/layout-catalog.md`](docs/layout-catalog.md)、規約は [`docs/design-guide.md`](docs/design-guide.md) を参照してください。
+標準フレームは，ページタイトルを左上，`header` のデッキ名と `footer` の発表者・日付を左下，ページ番号を右下に配置します．主なレイアウトは，通常／画像表紙，章扉，ステートメント，目次，2/3カラム，写真+文章，カード，比較，工程，フロー，機構図，コード，数式，読み物，参考文献，takeawayです．用途・避ける用途・最小例は [`docs/layout-catalog.md`](docs/layout-catalog.md)，規約は [`docs/design-guide.md`](docs/design-guide.md) を参照してください．
 
 ## Setup and standalone test
 

@@ -20,13 +20,31 @@ section.title {
   border-top: 12px solid var(--lt-accent);
 }
 
-section.cover > h1:first-child,
-section.title > h1:first-child { color: var(--lt-accent-strong); }
+section.cover > h1,
+section.title > h1 { color: var(--lt-accent-strong); }
 section.cover h2,
 section.title h2 { color: var(--lt-ink); }
 section.cover p,
 section.title p { color: var(--lt-muted); }
 
+section.cover.cover-image,
+section.title.cover-image,
+section.cover.cover--image,
+section.title.cover--image {
+  color: white;
+  border-top: 0;
+  background:
+    linear-gradient(90deg, rgba(8,25,34,.92) 0%, rgba(8,25,34,.78) 48%, rgba(8,25,34,.35) 100%),
+    var(--lt-cover-image) var(--lt-cover-position) / cover no-repeat;
+}
+section.cover.cover-image > h1,
+section.title.cover-image > h1,
+section.cover.cover--image > h1,
+section.title.cover--image > h1,
+section.cover.cover-image h2,
+section.title.cover-image h2,
+section.cover.cover--image h2,
+section.title.cover--image h2 { color: white; }
+
 section.section-title,
 section.section { background: linear-gradient(125deg, #14392b, var(--lt-accent)); }
-

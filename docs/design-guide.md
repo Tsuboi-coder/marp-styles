@@ -1,5 +1,19 @@
 # Design guide
 
+## Default frame
+
+The default frame follows an editorial hierarchy inherited from the historical
+`tmp1_Lin` prototype and normalized as the public `--lt-*` API:
+
+1. page title at the upper left;
+2. content in the central reading area;
+3. a small deck label (`header`) and presenter/date (`footer`) at the lower left;
+4. page number at the lower right.
+
+The `toc`, `statement`, per-slide `data-color`, and fixed-heading ideas from
+`tmp1_Lin` are now supported by `themes/base-design.css`. The prototype remains
+untouched as a regression reference.
+
 ## Tokens
 
 | Current/prototype token | Public token | Meaning |

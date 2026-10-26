@@ -16,6 +16,52 @@ All snippets assume `html: true` and `theme: base-design`. The executable source
 
 Rendered example: `examples/cover.md` → `dist/pdf/cover.pdf`.
 
+### Image cover supplied by a talk
+
+The shared theme owns the overlay and typography; the talk owns the image and
+its license. Set the image only in the talk-specific CSS.
+
+```css
+section.my-image-cover {
+  --lt-cover-image: url('../assets/cover.jpg');
+  --lt-cover-position: 50% 42%;
+}
+```
+
+```markdown
+<!-- _class: cover cover-image my-image-cover -->
+# Talk title
+```
+
+Do not put a remote URL in the shared theme. Record the image source and usage
+rights with the talk.
+
+## Basic page frame
+
+- Use `#` as the page title. It is fixed at the upper left.
+- Use the Marp `header` field for the small deck label at the lower left.
+- Use `footer` for the presenter and date on a second, smaller line.
+- Pagination is fixed at the lower right.
+- Clear both fields locally on covers when they would duplicate the title metadata.
+
+Rendered example: `examples/basic-structure.md`.
+
+## Statement
+
+- Use for: one sentence that deserves a deliberate pause.
+- Avoid for: a section title, a list, or an unsupported slogan.
+- Class: `statement`.
+
+```markdown
+<!-- _class: statement -->
+# One clear statement.
+
+Optional short attribution or qualification.
+```
+
+The deck label and page number remain visible so that the slide still belongs to
+the presentation frame.
+
 ## Two / three columns
 
 - Use for: a balanced comparison or equal-rank parallel ideas.
