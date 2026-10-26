@@ -1,0 +1,32 @@
+/* @theme formal-design */
+@import 'base-design';
+
+section {
+  --lt-ink: #202823;
+  --lt-muted: #657069;
+  --lt-background: #ffffff;
+  --lt-accent: #17633b;
+  --lt-accent-strong: #10482c;
+  --lt-accent-weak: #edf5f0;
+  --lt-border: #cbd8d0;
+  --lt-card-background: #ffffff;
+  background: var(--lt-background);
+}
+
+section.cover,
+section.title {
+  color: var(--lt-ink);
+  background: white;
+  border-top: 12px solid var(--lt-accent);
+}
+
+section.cover > h1:first-child,
+section.title > h1:first-child { color: var(--lt-accent-strong); }
+section.cover h2,
+section.title h2 { color: var(--lt-ink); }
+section.cover p,
+section.title p { color: var(--lt-muted); }
+
+section.section-title,
+section.section { background: linear-gradient(125deg, #14392b, var(--lt-accent)); }
+

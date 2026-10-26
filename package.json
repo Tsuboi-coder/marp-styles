@@ -1,0 +1,15 @@
+{
+  "name": "marp-styles",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "build": "node scripts/build-examples.mjs",
+    "build:html": "node scripts/build-examples.mjs --format html",
+    "build:pdf": "node scripts/build-examples.mjs --format pdf",
+    "test": "node tests/theme-smoke.mjs"
+  },
+  "devDependencies": {
+    "@marp-team/marp-cli": "4.5.1"
+  }
+}

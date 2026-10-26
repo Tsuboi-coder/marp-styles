@@ -1,6 +1,8 @@
 {
   "markdown.marp.themes": [
-    "./tmp1_Lin/base-design.css",
-    "./tmp1_Lin/formal-design.css"
-  ]
+    "./themes/base-design.css",
+    "./themes/formal-design.css"
+  ],
+  "markdown.marp.html": "all",
+  "markdown.marp.diagnostics.slideContentOverflow": true
 }

@@ -1,14 +1,61 @@
-# marp-slide-design
+# marp-styles
 
-marp形式でのスライドデザイン
+Marp用デザインシステム **Lin（リン）**。凛とした知性・清潔感と、罫線を活かす整然としたレイアウトを組み合わせ、講義・学会・研究発表で内容を明快に伝えることを目指します。
 
-## Lin
+`tmp1_Lin/` は既存試作を保護する履歴領域です。新規利用では `themes/` と `examples/` を参照してください。
 
-`tmp1_Lin` で制作しているスライドテーマを **Lin（リン）** と呼びます。
+## Themes
 
-Lin は、凛とした知性や清潔感を表す **Rin** と、罫線を活かした整然としたレイアウトを表す **Linea** を組み合わせた名前です。広い余白、端正な文字組み、細い罫線、落ち着いた差し色によって、内容を明快に伝えることを目指しています。
+- `themes/base-design.css`: 完結した共通テーマ。`--lt-*`トークンと`.lt-*`レイアウトを提供。
+- `themes/formal-design.css`: `base-design`を継承した抑制的な研究発表向けテーマ。
 
-主に講義、学会、研究発表など、読みやすさと信頼感が求められる場面での利用を想定しています。
+主なレイアウトは、表紙・章扉、2/3カラム、写真+文章、カード、比較、工程、フロー、機構図、コード、数式、読み物、参考文献、takeawayです。用途・避ける用途・最小例は [`docs/layout-catalog.md`](docs/layout-catalog.md)、規約は [`docs/design-guide.md`](docs/design-guide.md) を参照してください。
+
+## Setup and standalone test
+
+```sh
+npm ci
+npm test
+npm run build
+```
+
+`npm test` は `base-design` と `formal-design` の登録・継承・HTMLレンダリングを検証します。`npm run build` は全見本を `dist/html/` と `dist/pdf/` に生成します。
+
+## Use from another repository
+
+Marp CLIへ継承順に登録します。
+
+```sh
+marp slides.md \
+  --theme-set vendor/marp-styles/themes/base-design.css \
+  --theme-set vendor/marp-styles/themes/formal-design.css \
+  --html --pdf
+```
+
+VS Codeではワークスペース設定に両CSSを同じ順番で登録します。
+
+## Create a derived theme
+
+```css
+/* @theme my-talk */
+@import 'base-design';
+
+section {
+  --lt-accent: #b95d35;
+  --lt-accent-strong: #7f3c22;
+  --lt-accent-weak: #fff0e8;
+}
+
+section.cover {
+  /* この発表にだけ必要な表紙上書き */
+}
+```
+
+CLIには `base-design.css` を先に、派生CSSを後に登録し、Markdownでは `theme: my-talk` を指定します。発表固有の主張や内容はテーマへ入れません。
+
+## Compatibility
+
+`.cols`、`.card`、`.steps`、`.flow`、`.architecture`、`.takeaway` など試作で使われたクラスには互換エイリアスがあります。新規原稿では名前衝突を避けるため `.lt-*` を使用してください。
 
 ### 目次の自動更新
 

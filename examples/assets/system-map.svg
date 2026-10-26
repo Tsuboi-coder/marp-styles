@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="960" height="540" viewBox="0 0 960 540" role="img" aria-labelledby="title desc">
+  <title id="title">Example system map</title>
+  <desc id="desc">Three processing stages connected from input to output.</desc>
+  <rect width="960" height="540" rx="30" fill="#f8fbfa"/>
+  <g font-family="sans-serif" text-anchor="middle">
+    <rect x="70" y="190" width="220" height="150" rx="20" fill="#dff4ee" stroke="#008f7a" stroke-width="4"/>
+    <text x="180" y="255" font-size="32" fill="#173042">Input</text><text x="180" y="298" font-size="22" fill="#607381">source data</text>
+    <path d="M310 265h95" stroke="#ef6f5b" stroke-width="10"/><path d="m390 240 30 25-30 25" fill="none" stroke="#ef6f5b" stroke-width="10"/>
+    <rect x="430" y="150" width="220" height="230" rx="20" fill="#008f7a"/>
+    <text x="540" y="250" font-size="32" fill="white">Process</text><text x="540" y="294" font-size="22" fill="#dff4ee">transform</text>
+    <path d="M670 265h95" stroke="#ef6f5b" stroke-width="10"/><path d="m750 240 30 25-30 25" fill="none" stroke="#ef6f5b" stroke-width="10"/>
+    <rect x="790" y="190" width="120" height="150" rx="20" fill="#e5efff" stroke="#4f83cc" stroke-width="4"/>
+    <text x="850" y="255" font-size="30" fill="#173042">Output</text><text x="850" y="298" font-size="20" fill="#607381">result</text>
+  </g>
+</svg>
