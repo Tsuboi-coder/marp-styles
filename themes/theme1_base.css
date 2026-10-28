@@ -305,6 +305,14 @@ section.center-message footer { text-align: left; }
 
 .lt-cols--top { align-items: start; }
 
+.lt-cols > *,
+.lt-process > *,
+.theme1-effects > * {
+  box-sizing: border-box;
+  width: 100%;
+  min-width: 0;
+}
+
 .lt-process {
   display: grid;
   flex: 0 0 auto;
@@ -339,8 +347,11 @@ section.center-message footer { text-align: left; }
   padding: 18px 26px;
   color: #ffffff;
   background: var(--theme1-blue);
-  font-size: 27px;
-  font-weight: 800;
+  font-family: "Theme1 Hiragino W7", "Hiragino Sans", var(--theme1-font);
+  font-size: 30px;
+  font-synthesis: none;
+  font-weight: 700;
+  line-height: 1.25;
   text-align: center;
 }
 

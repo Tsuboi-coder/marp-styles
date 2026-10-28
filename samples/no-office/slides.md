@@ -75,7 +75,7 @@ footer: 坪井一馬｜2026年10月31日(土)
 
 ---
 
-<!-- _class: section-title -->
+<!-- _class: statement -->
 
 # PowerPointをやめると<br>何が起きる？
 
