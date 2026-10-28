@@ -1,0 +1,7 @@
+/* @theme lin-design */
+@import 'theme2_lin';
+
+/*
+ * Compatibility alias for existing decks.
+ * New decks should use theme2_lin directly.
+ */

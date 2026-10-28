@@ -1,0 +1,180 @@
+/* @theme theme2_lin */
+@import 'base-design';
+
+/*
+ * Lin presentation frame, reconstructed from teachers/Lin_Ans.pdf.
+ * The diagonal edge rises 720px while running 206.5px horizontally:
+ * atan(720 / 206.5) = 74deg.
+ */
+
+section {
+  --lin-blue: #1473e6;
+  --lin-blue-soft: #bdefff;
+  --lin-paper: #f3f7fd;
+  --lin-ink: #1f2933;
+  --lin-muted: #5d6670;
+  --lin-rule: 5px;
+
+  display: flex;
+  position: relative;
+  isolation: isolate;
+  flex-direction: column;
+  width: 1280px;
+  height: 720px;
+  padding: 34px 80px 54px;
+  overflow: hidden;
+  color: var(--lin-ink);
+  background: var(--lin-paper);
+  font-size: 29px;
+}
+
+/* The heading owns its line and spacing; no detached absolute title rail. */
+section > h1 {
+  position: relative;
+  inset: auto;
+  z-index: 2;
+  flex: 0 0 auto;
+  width: auto;
+  height: auto;
+  margin: 0 0 32px;
+  padding: 0 86px 14px 0;
+  overflow: visible;
+  color: var(--lin-blue);
+  border: 0;
+  border-bottom: var(--lin-rule) solid var(--lin-blue);
+  font-size: 38px;
+  line-height: 1.25;
+  white-space: normal;
+}
+
+section::after {
+  z-index: 4;
+  top: 30px;
+  right: 80px;
+  bottom: auto;
+  color: var(--lin-blue);
+  font-size: 24px;
+  font-weight: 500;
+}
+
+section > :not(h1):not(header):not(footer) { z-index: 2; }
+section header,
+section footer { display: none; }
+
+section h2,
+section h3,
+section strong { color: var(--lin-blue); }
+
+section.cover,
+section.title {
+  align-items: stretch;
+  justify-content: center;
+  padding: 76px 158px 76px 128px;
+  color: var(--lin-ink);
+  background-color: var(--lin-paper);
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1280 720'%3E%3Cpolygon fill='%23bdefff' points='1073.5,0 1280,0 1280,720 867,720'/%3E%3C/svg%3E");
+  background-position: center;
+  background-size: 100% 100%;
+  box-shadow: inset 18px 0 0 var(--lin-blue);
+}
+
+section.cover > h1,
+section.title > h1 {
+  position: relative;
+  width: 78%;
+  margin: 0 0 22px;
+  padding: 0;
+  color: var(--lin-blue);
+  border: 0;
+  font-size: 62px;
+  line-height: 1.2;
+}
+
+section.cover h2,
+section.title h2 {
+  width: 78%;
+  margin: 0 0 38px;
+  padding: 0 0 28px;
+  color: var(--lin-muted);
+  border-bottom: var(--lin-rule) solid var(--lin-blue);
+  font-size: 31px;
+  font-weight: 500;
+}
+
+section.cover .lin-meta,
+section.title .lin-meta {
+  color: var(--lin-muted);
+  font-size: 22px;
+  line-height: 1.55;
+}
+
+section.cover::after,
+section.title::after { display: none; }
+
+section.section-title,
+section.section {
+  align-items: stretch;
+  justify-content: center;
+  padding: 80px 80px 80px 430px;
+  color: var(--lin-ink);
+  background-color: var(--lin-paper);
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1280 720'%3E%3Cpolygon fill='%23bdefff' points='0,0 360,0 153.5,720 0,720'/%3E%3C/svg%3E");
+  background-position: center;
+  background-size: 100% 100%;
+  box-shadow: none;
+}
+
+section.section-title > h1,
+section.section > h1 {
+  position: relative;
+  width: auto;
+  margin: 0 0 26px;
+  padding: 0 0 24px;
+  color: var(--lin-blue);
+  border: 0;
+  border-bottom: var(--lin-rule) solid var(--lin-blue);
+  font-size: 58px;
+  line-height: 1.2;
+}
+
+section.section-title p,
+section.section p {
+  max-width: 760px;
+  color: var(--lin-muted);
+  font-size: 28px;
+}
+
+section.lin-band-title > h1 {
+  margin: -2px 0 30px;
+  padding: 30px 92px 30px 34px;
+  color: var(--lin-ink);
+  background: #dedede;
+  border: 0;
+  font-size: 38px;
+}
+
+section.lin-summary {
+  padding-right: 300px;
+  background-color: var(--lin-paper);
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1280 720'%3E%3Cpolygon fill='%23bdefff' points='1073.5,0 1280,0 1280,720 867,720'/%3E%3C/svg%3E");
+  background-position: center;
+  background-size: 100% 100%;
+}
+
+section.toc ol,
+section.toc ul {
+  width: 88%;
+  margin-top: 0;
+}
+
+section.toc ol > li,
+section.toc ul > li {
+  min-height: 72px;
+  border-bottom-color: #c7d7e8;
+}
+
+section.toc ol > li::before,
+section.toc ul > li::before { color: var(--lin-blue); }
+
+section .lt-card,
+section .card { box-shadow: none; }

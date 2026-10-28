@@ -1,17 +1,53 @@
 # marp-styles
 
-Marp用デザインシステム **Lin（リン）**。凛とした知性・清潔感と、罫線を活かす整然としたレイアウトを組み合わせ、講義・学会・研究発表で内容を明快に伝えることを目指します。
-
-`tmp1_Lin/` は既存試作を保護する履歴領域です。固定見出し、目次、ステートメント、ページ別配色の考え方は正式テーマへ統合済みです。新規利用では `themes/` と `examples/` を参照してください。
+Marp用の再利用可能なテーマと、実際にレンダリングできるサンプルを管理するリポジトリです。
 
 ## Themes
 
-- `themes/base-design.css`: 完結した共通テーマ。`--lt-*`トークンと`.lt-*`レイアウトを提供。
-- `themes/formal-design.css`: `base-design`を継承した抑制的な研究発表向けテーマ。
+新しい原稿では、次の2テーマを直接指定します。
 
-標準フレームは，ページタイトルを左上，`header` のデッキ名と `footer` の発表者・日付を左下，ページ番号を右下に配置します．主なレイアウトは，通常／画像表紙，章扉，ステートメント，目次，2/3カラム，写真+文章，カード，比較，工程，フロー，機構図，コード，数式，読み物，参考文献，takeawayです．用途・避ける用途・最小例は [`docs/layout-catalog.md`](docs/layout-catalog.md)，規約は [`docs/design-guide.md`](docs/design-guide.md) を参照してください．
+| テーマ | ファイル | 用途 |
+|---|---|---|
+| `theme1_base` | `themes/theme1_base.css` | 白地と青を基調にした標準テーマ。固定見出し、フッター、中央訴求、章扉、配色切替を提供 |
+| `theme2_lin` | `themes/theme2_lin.css` | `teachers/Lin_Ans.pdf`を基にしたLinテーマ。見出し線と74度の斜面を使う構成 |
 
-## Setup and standalone test
+`theme1_base` は単独で利用できます。`theme2_lin` は共通レイアウトAPIを持つ
+`base-design`を継承するため、CLIでは `base-design.css` を先に登録してください。
+
+### Compatibility themes
+
+既存原稿を壊さないため、次の名前も残しています。
+
+- `base-design`：従来の共通レイアウトテーマ
+- `formal-design`：`base-design`を継承する研究発表向けテーマ
+- `lin-design`：`theme2_lin`への互換エイリアス。新規原稿では`theme2_lin`を使用
+
+`tmp1_Lin/` は歴史的な試作資料であり、公開テーマの正本ではありません。
+
+## Repository layout
+
+```text
+themes/     公開テーマ。新テーマの正本と互換テーマ
+examples/   レイアウト部品の小さな実行例
+samples/    完成形のMarkdownと、確認済みPDF
+docs/       設計規約、レイアウトカタログ、運用説明
+tests/      テーマ登録とレンダリングのスモークテスト
+tmp1_Lin/   変更しない歴史的試作
+dist/       再生成可能なHTML/PDF。Git管理外
+```
+
+## Included samples
+
+| サンプル | Markdown | PDF |
+|---|---|---|
+| Theme 1の配色・基本構成 | [`samples/theme1_base/slides.md`](samples/theme1_base/slides.md) | [`samples/theme1_base/slides.pdf`](samples/theme1_base/slides.pdf) |
+| Theme 2 Linの6ページ構成 | [`samples/theme2_lin/slides.md`](samples/theme2_lin/slides.md) | [`samples/theme2_lin/slides.pdf`](samples/theme2_lin/slides.pdf) |
+| 「さあみんなオフィスを使うのをやめよう！」 | [`samples/no-office/slides.md`](samples/no-office/slides.md) | [`samples/no-office/slides.pdf`](samples/no-office/slides.pdf) |
+
+`samples/` のPDFは、Markdownとテーマを確認できる成果物としてGit管理します。
+`examples/` の一括生成物は再生成可能なため `dist/` に置き、Git管理しません。
+
+## Setup and verification
 
 ```sh
 pnpm install --frozen-lockfile
@@ -19,51 +55,62 @@ pnpm test
 pnpm run build
 ```
 
-`pnpm test` は `base-design` と `formal-design` の登録・継承・HTMLレンダリングを検証します。`pnpm run build` は全見本を `dist/html/` と `dist/pdf/` に生成します。
-見本は形式ごとに一括変換し、PDF生成に使うChromiumの起動回数を抑えています。ブラウザを使わずHTMLだけ確認する場合は `pnpm run build:html` を利用してください。
+- `pnpm test`：テーマ名、継承関係、代表原稿のHTMLレンダリングを検証
+- `pnpm run build`：`examples/` のHTML/PDFと、`samples/` の確認用HTML/PDFを生成
+- `pnpm run build:html`：Chromiumを使うPDF生成を省き、HTMLだけ生成
+- `pnpm run build:pdf`：PDFだけ生成し、`samples/` の管理対象PDFも更新
 
 ## Use from another repository
 
-Marp CLIへ継承順に登録します。
+Theme 1だけを使う場合：
+
+```sh
+marp slides.md \
+  --theme-set vendor/marp-styles/themes/theme1_base.css \
+  --pdf
+```
+
+Theme 2 Linを使う場合：
 
 ```sh
 marp slides.md \
   --theme-set vendor/marp-styles/themes/base-design.css \
-  --theme-set vendor/marp-styles/themes/formal-design.css \
-  --html --pdf
+  --theme-set vendor/marp-styles/themes/theme2_lin.css \
+  --pdf
 ```
 
-VS Codeではワークスペース設定に両CSSを同じ順番で登録します。
+VS Codeでは `.vscode/settings.json` の `markdown.marp.themes` に同じ順序でCSSを登録します。
 
-## Create a derived theme
+## Theme 1 frame
 
-```css
-/* @theme my-talk */
-@import 'base-design';
+通常ページでは、小さなセクション名を `.slide-kicker` に入れ、その直後にページ見出しを書きます。
 
-section {
-  --lt-accent: #b95d35;
-  --lt-accent-strong: #7f3c22;
-  --lt-accent-weak: #fff0e8;
-}
+```markdown
+<div class="slide-kicker">セクションタイトル</div>
 
-section.cover {
-  /* この発表にだけ必要な表紙上書き */
-}
+# ページ見出し
 ```
 
-CLIには `base-design.css` を先に、派生CSSを後に登録し、Markdownでは `theme: my-talk` を指定します。発表固有の主張や内容はテーマへ入れません。
+中央へ一つの文だけを置く場合は `center-message` を使います。
 
-## Compatibility
+```markdown
+<!-- _class: center-message -->
 
-`.cols`、`.card`、`.steps`、`.flow`、`.architecture`、`.takeaway` など試作で使われたクラスには互換エイリアスがあります。新規原稿では名前衝突を避けるため `.lt-*` を使用してください。
-
-### 目次の自動更新
-
-`slides.md` に `<!-- _class: section -->` のスライドを追加した後、リポジトリのルートで次を実行します。
-
-```sh
-node scripts/update-toc.mjs
+# 中央へ表示するメッセージ
 ```
 
-各SECTIONの `##` 見出しから目次が再生成され、`SECTION 01` から始まる番号も定義順に振り直されます。まとめページがある場合は、その見出しも目次の末尾へ追加されます。目次内の `AUTO-TOC` で囲まれた部分は直接編集しません。
+青が既定色です。スライド単位で `palette-red`、`palette-green`、
+`palette-yellow`、`palette-purple` を指定できます。
+
+## Theme 2 Lin geometry
+
+Linの斜面は、スライド高720pxに対する水平移動206.5pxから74度を構成します。
+斜面は表紙、章扉、まとめに限定し、通常ページの見出しと本文は通常フローで配置します。
+
+## Compatibility API
+
+従来の `base-design` が提供する `--lt-*` トークンと `.lt-*` レイアウトは維持しています。
+`.cols`、`.card`、`.steps`、`.flow`、`.architecture`、`.takeaway` などの旧クラスも互換目的で残しています。
+
+詳細は [`docs/architecture.md`](docs/architecture.md)、[`docs/design-guide.md`](docs/design-guide.md)、
+[`docs/layout-catalog.md`](docs/layout-catalog.md) を参照してください。

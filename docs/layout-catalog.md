@@ -1,6 +1,37 @@
 # Layout catalog
 
-All snippets assume `html: true` and `theme: base-design`. The executable source is under `examples/`; after `pnpm run build`, rendered HTML and PDF are under `dist/`.
+The canonical theme samples are under `samples/` with their checked PDFs.
+The smaller compatibility-layout snippets under `examples/` use `theme: base-design`;
+after `pnpm run build`, their generated HTML and PDF are under `dist/`.
+
+## Theme 1 Base structure
+
+Use `theme: theme1_base` for the white-and-blue default frame. The executable
+palette sample is `samples/theme1_base/slides.md`; the complete-deck example is
+`samples/no-office/slides.md`.
+
+- `.slide-kicker`: small section label above the page heading;
+- default `#`: fixed-height main heading in the theme accent color;
+- `center-message`: one centered appeal or question;
+- `cover`, `section-title`, `statement`, `summary`: deck-level page types;
+- `palette-red`, `palette-green`, `palette-yellow`, `palette-purple`: per-page palettes;
+- `.lt-cols`, `.lt-process`, `.lt-step`, `.lt-takeaway`: reusable content layouts.
+
+## Lin six-page structure
+
+Use `theme: theme2_lin` when matching the restrained blue structure demonstrated
+by `teachers/Lin_Ans.pdf`. The executable reference is
+`samples/theme2_lin/slides.md` and covers these semantic page types:
+
+- `cover`: title, subtitle, presenter/date, right 74-degree edge;
+- `toc`: numbered agenda in the normal heading frame;
+- `section-title`: chapter transition with the 74-degree edge on the left;
+- default: ordinary content with a heading-owned underline;
+- `lin-band-title`: occasional gray heading band;
+- `lin-summary`: final synthesis with the right edge.
+
+Do not apply the diagonal to every slide. It marks deck-level transitions and
+the final synthesis, while ordinary content stays in normal flow.
 
 ## Cover / section title
 

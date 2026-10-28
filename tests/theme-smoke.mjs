@@ -3,16 +3,25 @@ import { resolve } from 'node:path';
 import { spawnSync } from 'node:child_process';
 
 const root = resolve(import.meta.dirname, '..');
+const theme1 = resolve(root, 'themes', 'theme1_base.css');
 const base = resolve(root, 'themes', 'base-design.css');
 const formal = resolve(root, 'themes', 'formal-design.css');
+const theme2 = resolve(root, 'themes', 'theme2_lin.css');
+const linAlias = resolve(root, 'themes', 'lin-design.css');
 const marp = resolve(root, 'node_modules', '.bin', 'marp');
 const out = resolve(root, 'dist', 'test');
 mkdirSync(out, { recursive: true });
 
 const assertions = [
+  [theme1, '/* @theme theme1_base */'],
+  [theme1, "@import 'default'"],
   [base, '/* @theme base-design */'],
   [formal, '/* @theme formal-design */'],
   [formal, "@import 'base-design'"],
+  [theme2, '/* @theme theme2_lin */'],
+  [theme2, "@import 'base-design'"],
+  [linAlias, '/* @theme lin-design */'],
+  [linAlias, "@import 'theme2_lin'"],
 ];
 for (const [file, needle] of assertions) {
   if (!existsSync(file) || !readFileSync(file, 'utf8').includes(needle)) {
@@ -21,17 +30,20 @@ for (const [file, needle] of assertions) {
   }
 }
 
-for (const [theme, input] of [
+const themes = [theme1, base, formal, theme2, linAlias];
+for (const [name, input] of [
+  ['theme1_base', resolve(root, 'samples', 'theme1_base', 'slides.md')],
+  ['theme2_lin', resolve(root, 'samples', 'theme2_lin', 'slides.md')],
   ['base-design', resolve(root, 'examples', 'gallery.md')],
   ['formal-design', resolve(root, 'tests', 'formal-smoke.md')],
+  ['no-office', resolve(root, 'samples', 'no-office', 'slides.md')],
 ]) {
   const result = spawnSync(marp, [
     input,
-    '--theme-set', base,
-    '--theme-set', formal,
+    ...themes.flatMap((theme) => ['--theme-set', theme]),
     '--html',
     '--allow-local-files',
-    '--output', resolve(out, `${theme}.html`),
+    '--output', resolve(out, `${name}.html`),
   ], { cwd: root, encoding: 'utf8' });
   if (result.status !== 0) {
     console.error(result.stdout);
@@ -40,4 +52,4 @@ for (const [theme, input] of [
   }
 }
 
-console.log('Theme smoke tests passed: base-design and formal-design render successfully.');
+console.log('Theme smoke tests passed: canonical themes, compatibility themes, and samples render successfully.');

@@ -1,9 +1,8 @@
 # Design guide
 
-## Default frame
+## Theme 1 Base frame
 
-The default frame follows an editorial hierarchy inherited from the historical
-`tmp1_Lin` prototype and normalized as the public `--lt-*` API:
+`theme1_base` follows a restrained editorial hierarchy:
 
 1. page title at the upper left;
 2. content in the central reading area;
@@ -15,11 +14,14 @@ leading rule. Covers use a restrained color gradient, while section dividers
 use a pale accent wash and a single edge rule so that transitions remain visible
 without competing with the talk content.
 
-The `toc`, `statement`, per-slide `data-color`, and fixed-heading ideas from
-`tmp1_Lin` are now supported by `themes/base-design.css`. The prototype remains
-untouched as a regression reference.
+The page heading uses `Hiragino Sans W7` when available. The smaller section
+label uses `Hiragino Kaku Gothic ProN W6`; synthetic bolding is disabled for
+both. Blue is the default palette, with red, green, yellow, and purple switches.
 
-## Tokens
+Theme 1 uses `--theme1-*` tokens. The older `base-design` compatibility theme
+continues to expose `--lt-*` tokens for existing decks and for `theme2_lin`.
+
+## Compatibility tokens
 
 | Current/prototype token | Public token | Meaning |
 |---|---|---|
@@ -33,7 +35,9 @@ untouched as a regression reference.
 | `--blue` | `--lt-secondary` | secondary series |
 | `--line` | `--lt-border` | borders and separators |
 
-Override tokens on `section`, not individual descendants, so cover and layout components inherit consistently. A derived theme may override the cover separately after its general tokens.
+These `--lt-*` names belong to the compatibility layout API used by
+`base-design`, `formal-design`, and `theme2_lin`. Override tokens on `section`,
+not individual descendants, so layouts inherit consistently.
 
 ## Layout choice
 
@@ -45,6 +49,18 @@ Override tokens on `section`, not individual descendants, so cover and layout co
 - Dense source material: reading/references; do not compensate with tiny type.
 
 Avoid consecutive three-card pages, cards containing only a short phrase, and decorative diagrams that do not preserve the meaning of the source.
+
+## Theme 2 Lin geometry
+
+`themes/theme2_lin.css` keeps headings and body content in normal document flow.
+The ordinary heading owns its underline through `border-bottom`; do not create
+a detached absolute line for it. The page number is the only absolutely
+positioned frame element; diagonal decoration is a slide background image.
+
+The Lin diagonal runs from upper right to lower left at 74 degrees. At the
+1280×720 theme size, its horizontal run is 206.5px for a 720px rise. The SVG
+background polygons use those coordinates directly; do not approximate the
+angle separately on each slide.
 
 ## Fonts
 
